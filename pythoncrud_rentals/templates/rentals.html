@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Rentals - Rental Management{% endblock %}
+
+{% block content %}
+<div class="card-minimal mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h2 class="m-0 fw-600">Rental Contracts</h2>
+        <a href="{{ url_for('add_rental') }}" class="btn btn-primary-custom">Create New Rental</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-clean">
+            <thead>
+                <tr>
+                    <th>Property Name</th>
+                    <th>Customer Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Payment</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                <tr>
+                    <td><strong>{{ rental.property_title }}</strong></td>
+                    <td>{{ rental.customer_name }}</td>
+                    <td class="text-muted small">{{ rental.start_date.strftime('%Y-%m-%d') }}</td>
+                    <td class="text-muted small">
+                        {% if rental.end_date %}
+                        {{ rental.end_date.strftime('%Y-%m-%d') }}
+                        {% else %}
+                        Ongoing
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span
+                            class="badge-status {{ 'bg-available' if rental.payment_status == 'Paid' else 'bg-rented' }}">
+                            {{ rental.payment_status }}
+                        </span>
+                    </td>
+                    <td class="text-end">
+                        <a href="{{ url_for('edit_rental', id=rental.rental_id) }}" class="btn btn-edit me-1">Edit</a>
+                        <a href="{{ url_for('delete_rental', id=rental.rental_id) }}" class="btn btn-delete"
+                            onclick="return confirm('Delete this rental record?')">Delete</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center py-5 text-muted">No rental records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

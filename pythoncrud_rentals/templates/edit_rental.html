@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Rental - Rental Management{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card-minimal">
+            <h3 class="mb-4 fw-600">Update Agreement Terms</h3>
+            <form action="{{ url_for('edit_rental', id=rental.rental_id) }}" method="POST">
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="start_date" class="form-label text-muted small fw-500">Agreement Start Date</label>
+                        <input type="date" class="form-control py-2" id="start_date" name="start_date"
+                            value="{{ rental.start_date }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="end_date" class="form-label text-muted small fw-500">Agreement End Date</label>
+                        <input type="date" class="form-control py-2" id="end_date" name="end_date"
+                            value="{{ rental.end_date }}">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="payment_status" class="form-label text-muted small fw-500">Update Payment Status</label>
+                    <select class="form-select py-2" id="payment_status" name="payment_status" required>
+                        <option value="Pending" {{ 'selected' if rental.payment_status=='Pending' }}>Pending</option>
+                        <option value="Paid" {{ 'selected' if rental.payment_status=='Paid' }}>Paid</option>
+                    </select>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary-custom py-2">Save Updates</button>
+                    <a href="{{ url_for('list_rentals') }}" class="btn btn-edit py-2">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

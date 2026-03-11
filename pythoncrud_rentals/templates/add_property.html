@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Property - Rental Management{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card-minimal">
+            <h3 class="mb-4 fw-600">Add New Property Listing</h3>
+            <form action="{{ url_for('add_property') }}" method="POST">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="landlord_id" class="form-label text-muted small fw-500">Pick Landlord</label>
+                        <select class="form-select py-2" id="landlord_id" name="landlord_id" required>
+                            <option value="">Select an owner</option>
+                            {% for landlord in landlords %}
+                            <option value="{{ landlord.landlord_id }}">{{ landlord.full_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="title" class="form-label text-muted small fw-500">Property Title</label>
+                        <input type="text" class="form-control py-2" id="title" name="title"
+                            placeholder="Villa, Studio, Duplex" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label text-muted small fw-500">Property Location</label>
+                    <input type="text" class="form-control py-2" id="location" name="location"
+                        placeholder="City or District" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="price" class="form-label text-muted small fw-500">Monthly Rent (RWF)</label>
+                        <input type="number" step="0.01" class="form-control py-2" id="price" name="price"
+                            placeholder="450000" required>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="status" class="form-label text-muted small fw-500">Initial Status</label>
+                        <select class="form-select py-2" id="status" name="status" required>
+                            <option value="Available">Available</option>
+                            <option value="Rented">Rented</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary-custom py-2">Add Property</button>
+                    <a href="{{ url_for('list_properties') }}" class="btn btn-edit py-2">Go Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
