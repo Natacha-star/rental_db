@@ -1,7 +1,6 @@
-<?php
 include '../auth/check_login.php';
 
-$page_title = 'Add Customer';
+$page_title = 'Add Landlord';
 include '../header.php';
 include '../db_connect.php';
 
@@ -11,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO Customers (full_name, phone, email, password) VALUES ('$full_name', '$phone', '$email', '$password')";
+    $sql = "INSERT INTO Landlords (full_name, phone, email, password) VALUES ('$full_name', '$phone', '$email', '$password')";
     if (mysqli_query($conn, $sql)) {
         header('Location: list.php');
         exit;
@@ -23,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="row justify-content-center mt-4">
     <div class="col-md-6">
-        <div class="card p-4 shadow-sm border-0">
-            <h2 class="mb-4 text-center">Add New Customer</h2>
+        <div class="card p-4">
+            <h2 class="mb-4 text-center">Add New Landlord</h2>
             <?php if (isset($error)): ?>
-                <div class="alert alert-danger px-4 rounded-pill"><?php echo $error; ?></div>
+                <div class="alert alert-danger"><?php echo $error; ?></div>
             <?php endif; ?>
             <form method="POST">
                 <div class="mb-3">
@@ -46,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="password" class="form-control rounded-pill px-4" id="password" name="password" required>
                 </div>
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary rounded-pill px-4 flex-grow-1">Save Customer</button>
+                    <button type="submit" class="btn btn-primary rounded-pill px-4 flex-grow-1">Save Landlord</button>
                     <a href="list.php" class="btn btn-secondary rounded-pill px-4">Cancel</a>
                 </div>
             </form>

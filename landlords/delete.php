@@ -9,7 +9,7 @@ include '../db_connect.php';
 
 $id = $_GET['id'] ?? null;
 if ($id) {
-    $sql = "DELETE FROM Rentals WHERE rental_id = $id";
+    $sql = "DELETE FROM Landlords WHERE landlord_id = $id";
     mysqli_query($conn, $sql);
 }
 

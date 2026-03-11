@@ -4,8 +4,9 @@ use Rental_Management_Database;
 create table Landlords (
     landlord_id int(4) Primary key,
     full_name varchar(50) not null,
-    phone int(10) not null,
-    email varchar(20),
+    phone varchar(20) not null,
+    email varchar(100),
+    password varchar(255) not null,
     created_at datetime default current_timestamp 
 );
 
@@ -14,6 +15,7 @@ CREATE TABLE Customers (
     full_name VARCHAR(50) NOT NULL,
     phone VARCHAR(20) NOT NULL,
     email VARCHAR(100),
+    password VARCHAR(255) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -26,7 +28,6 @@ CREATE TABLE Properties (
     price DECIMAL(10,2) NOT NULL,
     status ENUM('Available', 'Rented') DEFAULT 'Available',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-property_id, landlord_id, address, rent_price
     CONSTRAINT fk_landlord
         FOREIGN KEY (landlord_id)
         REFERENCES Landlords(landlord_id)
