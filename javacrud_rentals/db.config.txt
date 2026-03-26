@@ -1,0 +1,5 @@
+user=root
+pass=
+host=localhost
+port=3307
+db=rental_management_database
